@@ -1,49 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Register - AgriGuide AI</title>
+    <title>AgriGuide AI - Register</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f1f8e9;
-            color: #263a29;
+            background-color: #eef7e8;
         }
 
         nav {
-            background: #2e7d32;
-            padding: 18px 8%;
+            background-color: #2e7d32;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
+        nav h2 {
             color: white;
-            font-size: 26px;
-            font-weight: bold;
+            margin: 0;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 30px;
             font-weight: bold;
         }
 
-        .register-box {
-            width: 90%;
-            max-width: 550px;
-            margin: 60px auto;
+        .container {
+            width: 550px;
+            margin: 70px auto;
             background: white;
             padding: 40px;
             border-radius: 15px;
@@ -53,40 +42,35 @@
         h1 {
             text-align: center;
             color: #2e7d32;
-            margin-bottom: 10px;
         }
 
         .subtitle {
             text-align: center;
-            margin-bottom: 30px;
             color: #555;
+            margin-bottom: 35px;
         }
 
         label {
             display: block;
             margin-top: 18px;
-            margin-bottom: 7px;
             font-weight: bold;
         }
 
         input {
             width: 100%;
             padding: 13px;
+            margin-top: 8px;
+            box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 7px;
             font-size: 16px;
         }
 
-        input:focus {
-            border-color: #2e7d32;
-            outline: none;
-        }
-
         button {
             width: 100%;
+            padding: 15px;
             margin-top: 30px;
-            padding: 14px;
-            background: #2e7d32;
+            background-color: #2e7d32;
             color: white;
             border: none;
             border-radius: 8px;
@@ -95,16 +79,12 @@
             cursor: pointer;
         }
 
-        button:hover {
-            background: #1b5e20;
-        }
-
-        .login-text {
+        .login-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
-        .login-text a {
+        .login-link a {
             color: #2e7d32;
             font-weight: bold;
             text-decoration: none;
@@ -115,20 +95,16 @@
 <body>
 
     <nav>
-
-        <div class="logo">
-            AgriGuide AI
-        </div>
+        <h2>AgriGuide AI</h2>
 
         <div>
             <a href="/">Home</a>
             <a href="/login">Login</a>
         </div>
-
     </nav>
 
 
-    <div class="register-box">
+    <div class="container">
 
         <h1>Farmer Registration</h1>
 
@@ -137,7 +113,7 @@
         </p>
 
 
-        <form method="POST">
+        <form action="/register" method="POST">
 
             <label>Name</label>
             <input
@@ -182,7 +158,7 @@
         </form>
 
 
-        <div class="login-text">
+        <div class="login-link">
             Already have an account?
             <a href="/login">Login here</a>
         </div>

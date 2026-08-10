@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///farmers.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.secret_key = "agriguide_secret_key"
 
 db = SQLAlchemy(app)
 
@@ -36,6 +37,11 @@ def register():
         password = request.form["password"]
         location = request.form["location"]
 
+        existing_farmer = Farmer.query.filter_by(email=email).first()
+
+        if existing_farmer:
+            return "Email already registered. Please use another email."
+
         farmer = Farmer(
             name=name,
             email=email,
@@ -65,11 +71,36 @@ def login():
         ).first()
 
         if farmer:
-            return f"Welcome {farmer.name}!"
 
-        return "Invalid email or password"
+            session["farmer_id"] = farmer.id
+            session["farmer_name"] = farmer.name
+
+            return redirect("/dashboard")
+
+        return "Invalid email or password."
+
 
     return render_template("login.html")
+
+
+@app.route("/dashboard")
+def dashboard():
+
+    if "farmer_id" not in session:
+        return redirect("/login")
+
+    return render_template(
+        "dashboard.html",
+        name=session["farmer_name"]
+    )
+
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect("/")
 
 
 if __name__ == "__main__":

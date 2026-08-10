@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AgriGuide AI - Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #eef7e8;
+        }
+
+        nav {
+            background-color: #2e7d32;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: bold;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 70px 20px 40px;
+        }
+
+        .welcome h1 {
+            color: #234d20;
+            font-size: 40px;
+        }
+
+        .welcome p {
+            font-size: 20px;
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 30px 8%;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 250px;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px #cccccc;
+        }
+
+        .card h2 {
+            color: #2e7d32;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #2e7d32;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>AgriGuide AI</h2>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+
+    <section class="welcome">
+
+        <h1>Welcome {{ name }}!</h1>
+
+        <p>
+            Welcome to your AgriGuide AI farming dashboard.
+        </p>
+
+        <p>
+            Get intelligent farming guidance and crop recommendations.
+        </p>
+
+    </section>
+
+
+    <section class="services">
+
+        <div class="card">
+
+            <h2>Crop Recommendation</h2>
+
+            <p>
+                Get AI-based crop recommendations
+                using soil and weather conditions.
+            </p>
+
+            <a href="#" class="button">Explore</a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Weather</h2>
+
+            <p>
+                View weather information and
+                receive weather-based farming guidance.
+            </p>
+
+            <a href="#" class="button">View Weather</a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Farming Advisories</h2>
+
+            <p>
+                Read useful farming tips,
+                crop guidance and agricultural advisories.
+            </p>
+
+            <a href="#" class="button">Read Advisories</a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>My History</h2>
+
+            <p>
+                View your previous crop recommendations
+                and farming activities.
+            </p>
+
+            <a href="#" class="button">View History</a>
+
+        </div>
+
+    </section>
+
+</body>
+</html>
