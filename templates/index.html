@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriGuide AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f8f2;
+            color: #263a29;
+        }
+
+        nav {
+            background: #2e7d32;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px;
+            background: #dcedc8;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .services {
+            padding: 50px 8%;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ccc;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: #263a29;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 800px) {
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">AgriGuide AI</div>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="#">Login</a>
+            <a href="#">Register</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Smart Farming with AI</h1>
+
+        <p>
+            Get intelligent crop recommendations,
+            weather information and farming guidance.
+        </p>
+
+        <a href="#" class="button">Get Crop Recommendation</a>
+    </section>
+
+    <section class="services">
+
+        <h2>Our Services</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Crop Recommendation</h3>
+                <p>
+                    Get AI-based crop recommendations
+                    using soil and weather conditions.
+                </p>
+                <a href="#" class="button">Explore</a>
+            </div>
+
+            <div class="card">
+                <h3>Weather</h3>
+                <p>
+                    View weather information and receive
+                    weather-based farming guidance.
+                </p>
+                <a href="#" class="button">View Weather</a>
+            </div>
+
+            <div class="card">
+                <h3>Farming Advisories</h3>
+                <p>
+                    Read useful farming tips, crop guidance
+                    and agricultural advisories.
+                </p>
+                <a href="#" class="button">Read Advisories</a>
+            </div>
+
+            <div class="card">
+                <h3>My History</h3>
+                <p>
+                    View your previous crop recommendations
+                    and farming activities.
+                </p>
+                <a href="#" class="button">View History</a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 AgriGuide AI | Smart Farming Advisory Platform</p>
+    </footer>
+
+</body>
+</html>
