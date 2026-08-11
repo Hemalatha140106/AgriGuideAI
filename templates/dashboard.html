@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>AgriGuide AI - Dashboard</title>
 
     <style>
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -32,7 +34,7 @@
 
         .welcome {
             text-align: center;
-            padding: 70px 20px 40px;
+            padding: 60px 20px 30px;
         }
 
         .welcome h1 {
@@ -42,6 +44,7 @@
 
         .welcome p {
             font-size: 20px;
+            color: #444;
         }
 
         .services {
@@ -65,6 +68,11 @@
             color: #2e7d32;
         }
 
+        .card p {
+            color: #555;
+            line-height: 1.5;
+        }
+
         .button {
             display: inline-block;
             background-color: #2e7d32;
@@ -75,18 +83,30 @@
             font-weight: bold;
             margin-top: 10px;
         }
+
+        .button:hover {
+            background-color: #1b5e20;
+        }
+
     </style>
+
 </head>
 
 <body>
 
+
     <nav>
+
         <h2>AgriGuide AI</h2>
 
         <div>
+
             <a href="/">Home</a>
+
             <a href="/logout">Logout</a>
+
         </div>
+
     </nav>
 
 
@@ -107,6 +127,9 @@
 
     <section class="services">
 
+
+        <!-- Crop Recommendation -->
+
         <div class="card">
 
             <h2>Crop Recommendation</h2>
@@ -116,10 +139,14 @@
                 using soil and weather conditions.
             </p>
 
-            <a href="#" class="button">Explore</a>
+            <a href="/crop-recommendation" class="button">
+                Explore
+            </a>
 
         </div>
 
+
+        <!-- Weather -->
 
         <div class="card">
 
@@ -130,10 +157,14 @@
                 receive weather-based farming guidance.
             </p>
 
-            <a href="#" class="button">View Weather</a>
+            <a href="#" class="button">
+                View Weather
+            </a>
 
         </div>
 
+
+        <!-- Farming Advisories -->
 
         <div class="card">
 
@@ -144,10 +175,14 @@
                 crop guidance and agricultural advisories.
             </p>
 
-            <a href="#" class="button">Read Advisories</a>
+            <a href="#" class="button">
+                Read Advisories
+            </a>
 
         </div>
 
+
+        <!-- History -->
 
         <div class="card">
 
@@ -158,11 +193,15 @@
                 and farming activities.
             </p>
 
-            <a href="#" class="button">View History</a>
+            <a href="#" class="button">
+                View History
+            </a>
 
         </div>
 
+
     </section>
+
 
 </body>
 </html>

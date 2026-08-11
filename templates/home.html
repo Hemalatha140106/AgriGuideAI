@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriGuide AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8e8;
+            color: #111;
+        }
+
+        /* Navigation Bar */
+
+        .navbar {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px 8%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Hero Section */
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 80px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            color: #245b29;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .hero-button {
+            background-color: #2e7d32;
+            color: white;
+            padding: 16px 35px;
+            border-radius: 8px;
+
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .hero-button:hover {
+            background-color: #256b29;
+        }
+
+
+        /* Services */
+
+        .services {
+            padding: 20px 8% 70px;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 40px;
+        }
+
+        .service-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+
+        /* Service Cards */
+
+        .service-card {
+            background-color: white;
+
+            min-height: 250px;
+
+            padding: 35px 25px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+
+            text-align: center;
+
+            text-decoration: none;
+            color: #111;
+
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #2e7d32;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .service-card p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+
+        /* Explore Button */
+
+        .service-button {
+            display: inline-block;
+
+            background-color: #2e7d32;
+
+            color: white;
+
+            padding: 14px 30px;
+
+            border-radius: 8px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .service-button:hover {
+            background-color: #256b29;
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 900px) {
+
+            .service-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .service-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation Bar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            AgriGuide AI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+            <a href="{{ url_for('register') }}">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <h1>
+            Smart Farming with AI
+        </h1>
+
+        <p>
+            Get intelligent crop recommendations, weather information
+            and farming guidance.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('crop_recommendation') }}"
+               class="hero-button">
+
+                Get Started
+
+            </a>
+
+
+            <a href="{{ url_for('login') }}"
+               class="hero-button">
+
+                Login
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Services Section -->
+
+    <section class="services">
+
+        <h2>
+            Our Services
+        </h2>
+
+
+        <div class="service-container">
+
+
+            <!-- Crop Recommendation -->
+
+            <a href="{{ url_for('crop_recommendation') }}"
+               class="service-card">
+
+                <h3>
+                    Crop Recommendation
+                </h3>
+
+                <p>
+                    Get AI-based crop recommendations using
+                    soil and weather conditions.
+                </p>
+
+                <span class="service-button">
+                    Explore
+                </span>
+
+            </a>
+
+
+
+            <!-- Weather -->
+
+            <div class="service-card">
+
+                <h3>
+                    Weather
+                </h3>
+
+                <p>
+                    View weather information and
+                    farming guidance.
+                </p>
+
+                <span class="service-button">
+                    Coming Soon
+                </span>
+
+            </div>
+
+
+
+            <!-- Farming Advisories -->
+
+            <div class="service-card">
+
+                <h3>
+                    Farming Advisories
+                </h3>
+
+                <p>
+                    Read useful farming tips and
+                    agricultural advisories.
+                </p>
+
+                <span class="service-button">
+                    Coming Soon
+                </span>
+
+            </div>
+
+
+
+            <!-- My History -->
+
+            <div class="service-card">
+
+                <h3>
+                    My History
+                </h3>
+
+                <p>
+                    View your previous farming
+                    activities.
+                </p>
+
+                <span class="service-button">
+                    Coming Soon
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>

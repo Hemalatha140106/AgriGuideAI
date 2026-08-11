@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///farmers.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.secret_key = "agriguide_secret_key"
 
 db = SQLAlchemy(app)
 
@@ -24,7 +23,7 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("home.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -36,11 +35,6 @@ def register():
         email = request.form["email"]
         password = request.form["password"]
         location = request.form["location"]
-
-        existing_farmer = Farmer.query.filter_by(email=email).first()
-
-        if existing_farmer:
-            return "Email already registered. Please use another email."
 
         farmer = Farmer(
             name=name,
@@ -57,50 +51,46 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login")
 def login():
-
-    if request.method == "POST":
-
-        email = request.form["email"]
-        password = request.form["password"]
-
-        farmer = Farmer.query.filter_by(
-            email=email,
-            password=password
-        ).first()
-
-        if farmer:
-
-            session["farmer_id"] = farmer.id
-            session["farmer_name"] = farmer.name
-
-            return redirect("/dashboard")
-
-        return "Invalid email or password."
-
-
     return render_template("login.html")
 
 
-@app.route("/dashboard")
-def dashboard():
+@app.route("/crop-recommendation", methods=["GET", "POST"])
+def crop_recommendation():
 
-    if "farmer_id" not in session:
-        return redirect("/login")
+    recommendation = None
+
+    if request.method == "POST":
+
+        nitrogen = float(request.form["nitrogen"])
+        phosphorus = float(request.form["phosphorus"])
+        potassium = float(request.form["potassium"])
+        temperature = float(request.form["temperature"])
+        humidity = float(request.form["humidity"])
+        ph = float(request.form["ph"])
+        rainfall = float(request.form["rainfall"])
+
+
+        # Temporary recommendation logic
+
+        if rainfall > 200 and humidity > 70:
+            recommendation = "Rice"
+
+        elif temperature > 25 and rainfall > 100:
+            recommendation = "Maize"
+
+        elif ph >= 6 and ph <= 7.5 and rainfall < 100:
+            recommendation = "Wheat"
+
+        else:
+            recommendation = "Cotton"
+
 
     return render_template(
-        "dashboard.html",
-        name=session["farmer_name"]
+        "crop_recommendation.html",
+        recommendation=recommendation
     )
-
-
-@app.route("/logout")
-def logout():
-
-    session.clear()
-
-    return redirect("/")
 
 
 if __name__ == "__main__":
