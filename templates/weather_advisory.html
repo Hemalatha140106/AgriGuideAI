@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Weather Advisory - AgriGuideAI</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef8e9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #236b2d;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 30px;
+            background-color: #2d8435;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #236b2d;
+        }
+
+        .result {
+            margin-top: 35px;
+            padding: 25px;
+            background-color: #e5f5e7;
+            border-radius: 15px;
+        }
+
+        .result h2 {
+            color: #23752e;
+            text-align: center;
+        }
+
+        .advice {
+            background-color: white;
+            padding: 15px;
+            margin-top: 12px;
+            border-radius: 10px;
+            font-size: 17px;
+        }
+
+        .error {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #ffe5e5;
+            color: #b30000;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #23752e;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>Weather-Based Farming Advisory</h1>
+
+    <p class="subtitle">
+        Enter the current weather conditions to receive farming advice.
+    </p>
+
+
+    <form method="POST" action="/weather-advisory">
+
+        <label>Temperature (°C)</label>
+
+        <input
+            type="number"
+            name="temperature"
+            step="any"
+            required
+        >
+
+
+        <label>Humidity (%)</label>
+
+        <input
+            type="number"
+            name="humidity"
+            step="any"
+            required
+        >
+
+
+        <label>Rainfall (mm)</label>
+
+        <input
+            type="number"
+            name="rainfall"
+            step="any"
+            required
+        >
+
+
+        <button type="submit">
+            Get Farming Advisory
+        </button>
+
+    </form>
+
+
+    {% if alert %}
+
+    <div class="error">
+
+        {{ alert }}
+
+    </div>
+
+    {% endif %}
+
+
+    {% if advice %}
+
+    <div class="result">
+
+        <h2>Farming Advisory</h2>
+
+
+        {% for item in advice %}
+
+        <div class="advice">
+
+            {{ item }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <a class="back" href="/home">
+        ← Back to Home
+    </a>
+
+</div>
+
+</body>
+
+</html>
