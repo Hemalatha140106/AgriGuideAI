@@ -126,7 +126,6 @@ def crop_recommendation():
 
         try:
 
-            # Get input values
             nitrogen = float(request.form["nitrogen"])
             phosphorus = float(request.form["phosphorus"])
             potassium = float(request.form["potassium"])
@@ -135,9 +134,7 @@ def crop_recommendation():
             ph = float(request.form["ph"])
             rainfall = float(request.form["rainfall"])
 
-            # ==============================
             # INPUT VALIDATION
-            # ==============================
 
             if nitrogen < 0 or phosphorus < 0 or potassium < 0:
                 return render_template(
@@ -163,9 +160,7 @@ def crop_recommendation():
                     crop="Rainfall cannot be negative."
                 )
 
-            # ==============================
             # CROP SCORES
-            # ==============================
 
             scores = {
                 "Rice": 0,
@@ -177,9 +172,7 @@ def crop_recommendation():
                 "Millet": 0
             }
 
-            # ==============================
             # RICE
-            # ==============================
 
             if 20 <= temperature <= 30:
                 scores["Rice"] += 2
@@ -202,9 +195,7 @@ def crop_recommendation():
             if potassium >= 30:
                 scores["Rice"] += 1
 
-            # ==============================
             # WHEAT
-            # ==============================
 
             if 15 <= temperature <= 25:
                 scores["Wheat"] += 2
@@ -227,9 +218,7 @@ def crop_recommendation():
             if potassium >= 20:
                 scores["Wheat"] += 1
 
-            # ==============================
             # MAIZE
-            # ==============================
 
             if 20 <= temperature <= 35:
                 scores["Maize"] += 2
@@ -252,9 +241,7 @@ def crop_recommendation():
             if potassium >= 20:
                 scores["Maize"] += 1
 
-            # ==============================
             # COTTON
-            # ==============================
 
             if 25 <= temperature <= 35:
                 scores["Cotton"] += 2
@@ -277,9 +264,7 @@ def crop_recommendation():
             if potassium >= 30:
                 scores["Cotton"] += 2
 
-            # ==============================
             # SUGARCANE
-            # ==============================
 
             if 25 <= temperature <= 35:
                 scores["Sugarcane"] += 2
@@ -302,9 +287,7 @@ def crop_recommendation():
             if potassium >= 40:
                 scores["Sugarcane"] += 1
 
-            # ==============================
             # GROUNDNUT
-            # ==============================
 
             if 25 <= temperature <= 35:
                 scores["Groundnut"] += 2
@@ -327,9 +310,7 @@ def crop_recommendation():
             if potassium >= 20:
                 scores["Groundnut"] += 1
 
-            # ==============================
             # MILLET
-            # ==============================
 
             if 20 <= temperature <= 35:
                 scores["Millet"] += 2
@@ -351,10 +332,6 @@ def crop_recommendation():
 
             if potassium <= 50:
                 scores["Millet"] += 1
-
-            # ==============================
-            # FIND BEST CROP
-            # ==============================
 
             crop = max(scores, key=scores.get)
 
@@ -386,10 +363,6 @@ def weather_advisory():
             humidity = float(request.form["humidity"])
             rainfall = float(request.form["rainfall"])
 
-            # ==============================
-            # INPUT VALIDATION
-            # ==============================
-
             if humidity < 0 or humidity > 100:
 
                 alert = "Humidity must be between 0 and 100."
@@ -401,10 +374,6 @@ def weather_advisory():
             else:
 
                 recommendations = []
-
-                # ==============================
-                # TEMPERATURE ADVICE
-                # ==============================
 
                 if temperature >= 35:
 
@@ -426,10 +395,6 @@ def weather_advisory():
                         "Temperature is suitable for normal crop growth."
                     )
 
-                # ==============================
-                # HUMIDITY ADVICE
-                # ==============================
-
                 if humidity >= 80:
 
                     recommendations.append(
@@ -449,10 +414,6 @@ def weather_advisory():
                     recommendations.append(
                         "Humidity level is suitable for most crops."
                     )
-
-                # ==============================
-                # RAINFALL ADVICE
-                # ==============================
 
                 if rainfall >= 100:
 
@@ -483,6 +444,128 @@ def weather_advisory():
     return render_template(
         "weather_advisory.html",
         advice=advice,
+        alert=alert
+    )
+
+
+# ==========================================================
+# MODULE 3 - IRRIGATION RECOMMENDATION
+# ==========================================================
+
+@app.route("/irrigation", methods=["GET", "POST"])
+def irrigation():
+
+    recommendation = None
+    message = None
+    alert = None
+
+    if request.method == "POST":
+
+        try:
+
+            soil_moisture = float(request.form["soil_moisture"])
+            temperature = float(request.form["temperature"])
+            humidity = float(request.form["humidity"])
+            rainfall = float(request.form["rainfall"])
+
+            # ==============================
+            # INPUT VALIDATION
+            # ==============================
+
+            if soil_moisture < 0 or soil_moisture > 100:
+
+                alert = "Soil moisture must be between 0 and 100."
+
+            elif humidity < 0 or humidity > 100:
+
+                alert = "Humidity must be between 0 and 100."
+
+            elif rainfall < 0:
+
+                alert = "Rainfall cannot be negative."
+
+            else:
+
+                # ==============================
+                # IRRIGATION DECISION
+                # ==============================
+
+                if rainfall >= 100:
+
+                    recommendation = "No Irrigation Required"
+
+                    message = (
+                        "Heavy rainfall has been detected. "
+                        "Avoid irrigation and ensure proper drainage "
+                        "to prevent waterlogging."
+                    )
+
+                elif soil_moisture < 30:
+
+                    recommendation = "Irrigation Required"
+
+                    message = (
+                        "Soil moisture is low. "
+                        "Irrigate the crop adequately to maintain "
+                        "healthy plant growth."
+                    )
+
+                elif soil_moisture < 60:
+
+                    recommendation = "Moderate Irrigation"
+
+                    message = (
+                        "Soil moisture is at a moderate level. "
+                        "Provide irrigation according to the crop's "
+                        "water requirement."
+                    )
+
+                else:
+
+                    recommendation = "No Irrigation Required"
+
+                    message = (
+                        "Soil moisture is sufficient. "
+                        "Additional irrigation is not required at this time."
+                    )
+
+                # ==============================
+                # TEMPERATURE ADVICE
+                # ==============================
+
+                if temperature >= 35:
+
+                    message += (
+                        " High temperature is also present, so monitor "
+                        "the crop for signs of water stress."
+                    )
+
+                elif temperature <= 15:
+
+                    message += (
+                        " Since the temperature is low, avoid excessive "
+                        "irrigation."
+                    )
+
+                # ==============================
+                # HUMIDITY ADVICE
+                # ==============================
+
+                if humidity >= 80:
+
+                    message += (
+                        " High humidity is present, so avoid overwatering "
+                        "and monitor for fungal diseases."
+                    )
+
+        except ValueError:
+
+            alert = "Please enter valid numeric values."
+
+    return render_template(
+        "irrigation.html",
+        recommendation=recommendation,
+        message=message,
         alert=alert
     )
 

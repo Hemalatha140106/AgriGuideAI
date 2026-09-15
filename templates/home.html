@@ -316,24 +316,47 @@
 
 
 
-            <!-- Weather -->
+            <!-- Weather Advisory -->
 
-            <div class="service-card">
+            <a href="{{ url_for('weather_advisory') }}"
+               class="service-card">
 
                 <h3>
-                    Weather
+                    Weather Advisory
                 </h3>
 
                 <p>
-                    View weather information and
-                    farming guidance.
+                    Get weather-based farming guidance
+                    using temperature, humidity and rainfall.
                 </p>
 
                 <span class="service-button">
-                    Coming Soon
+                    Explore
                 </span>
 
-            </div>
+            </a>
+
+
+
+            <!-- Irrigation Recommendation -->
+
+            <a href="{{ url_for('irrigation') }}"
+               class="service-card">
+
+                <h3>
+                    Irrigation Recommendation
+                </h3>
+
+                <p>
+                    Get irrigation recommendations based on
+                    soil moisture and weather conditions.
+                </p>
+
+                <span class="service-button">
+                    Explore
+                </span>
+
+            </a>
 
 
 

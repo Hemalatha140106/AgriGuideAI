@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Irrigation Recommendation - AgriGuideAI</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef8e9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #236b2d;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 30px;
+            background-color: #2d8435;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #236b2d;
+        }
+
+        .result {
+            margin-top: 35px;
+            padding: 30px;
+            background-color: #e5f5e7;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .result h2 {
+            color: #23752e;
+            font-size: 28px;
+        }
+
+        .recommendation {
+            color: #166b24;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .error {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #ffe5e5;
+            color: #b30000;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #23752e;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>Irrigation Recommendation</h1>
+
+    <p class="subtitle">
+        Enter soil and weather conditions to get an irrigation recommendation.
+    </p>
+
+
+    <form method="POST" action="/irrigation">
+
+        <label>Soil Moisture (%)</label>
+
+        <input
+            type="number"
+            name="soil_moisture"
+            step="any"
+            min="0"
+            max="100"
+            required
+        >
+
+
+        <label>Temperature (°C)</label>
+
+        <input
+            type="number"
+            name="temperature"
+            step="any"
+            required
+        >
+
+
+        <label>Humidity (%)</label>
+
+        <input
+            type="number"
+            name="humidity"
+            step="any"
+            min="0"
+            max="100"
+            required
+        >
+
+
+        <label>Rainfall (mm)</label>
+
+        <input
+            type="number"
+            name="rainfall"
+            step="any"
+            min="0"
+            required
+        >
+
+
+        <button type="submit">
+            Check Irrigation Requirement
+        </button>
+
+    </form>
+
+
+    {% if alert %}
+
+    <div class="error">
+
+        {{ alert }}
+
+    </div>
+
+    {% endif %}
+
+
+    {% if recommendation %}
+
+    <div class="result">
+
+        <h2>Irrigation Recommendation</h2>
+
+        <div class="recommendation">
+
+            {{ recommendation }}
+
+        </div>
+
+        <div class="message">
+
+            {{ message }}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <a class="back" href="/home">
+        ← Back to Home
+    </a>
+
+</div>
+
+</body>
+
+</html>
