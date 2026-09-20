@@ -5,398 +5,380 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AgriGuide AI</title>
+    <title>AgriGuide AI - Home</title>
 
     <style>
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8e8;
-            color: #111;
+            background: #f4f8f2;
+            color: #333;
         }
 
-        /* Navigation Bar */
+        /* =========================
+           NAVIGATION BAR
+        ========================= */
 
-        .navbar {
-            background-color: #2e7d32;
-            color: white;
-            padding: 20px 8%;
-
+        nav {
+            background: #2e7d32;
+            padding: 18px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
+        nav h1 {
+            color: white;
+            font-size: 26px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 35px;
-        }
-
-        .nav-links a {
+        nav a {
             color: white;
             text-decoration: none;
-            font-size: 18px;
+            margin-left: 25px;
+            font-size: 16px;
             font-weight: bold;
         }
 
-        .nav-links a:hover {
+        nav a:hover {
             text-decoration: underline;
         }
 
-
-        /* Hero Section */
+        /* =========================
+           HERO SECTION
+        ========================= */
 
         .hero {
             text-align: center;
-            padding: 70px 20px 80px;
+            padding: 60px 20px 40px;
+            background: #e8f5e9;
         }
 
-        .hero h1 {
-            font-size: 52px;
-            color: #245b29;
-            margin-bottom: 25px;
+        .hero h2 {
+            color: #2e7d32;
+            font-size: 36px;
+            margin-bottom: 15px;
         }
 
         .hero p {
-            font-size: 22px;
-            margin-bottom: 40px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .hero-button {
-            background-color: #2e7d32;
-            color: white;
-            padding: 16px 35px;
-            border-radius: 8px;
-
-            text-decoration: none;
             font-size: 18px;
-            font-weight: bold;
+            color: #555;
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.6;
         }
 
-        .hero-button:hover {
-            background-color: #256b29;
+        /* =========================
+           MODULES SECTION
+        ========================= */
+
+        .modules {
+            padding: 45px 50px;
         }
 
-
-        /* Services */
-
-        .services {
-            padding: 20px 8% 70px;
-        }
-
-        .services h2 {
+        .modules h2 {
             text-align: center;
-            font-size: 38px;
-            margin-bottom: 40px;
-        }
-
-        .service-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 28px;
-        }
-
-
-        /* Service Cards */
-
-        .service-card {
-            background-color: white;
-
-            min-height: 250px;
-
-            padding: 35px 25px;
-
-            border-radius: 15px;
-
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
-
-            text-align: center;
-
-            text-decoration: none;
-            color: #111;
-
-            transition: transform 0.2s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-card h3 {
             color: #2e7d32;
-            font-size: 28px;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
+            font-size: 30px;
         }
 
-        .service-card p {
-            font-size: 18px;
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .card h3 {
+            color: #2e7d32;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #666;
             line-height: 1.5;
-            margin-bottom: 30px;
+            min-height: 70px;
         }
 
-
-        /* Explore Button */
-
-        .service-button {
+        .card a {
             display: inline-block;
-
-            background-color: #2e7d32;
-
+            margin-top: 20px;
+            padding: 11px 20px;
+            background: #2e7d32;
             color: white;
-
-            padding: 14px 30px;
-
-            border-radius: 8px;
-
-            font-size: 17px;
-
-            font-weight: bold;
-
             text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
         }
 
-        .service-button:hover {
-            background-color: #256b29;
+        .card a:hover {
+            background: #1b5e20;
         }
 
+        /* =========================
+           PLANT DISEASE CARD
+        ========================= */
 
-        /* Mobile */
-
-        @media (max-width: 900px) {
-
-            .service-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
+        .disease-card {
+            border: 2px solid #81c784;
         }
+
+        .disease-card h3 {
+            color: #1b5e20;
+        }
+
+        .ai-label {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        /* =========================
+           ABOUT SECTION
+        ========================= */
+
+        .about {
+            background: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .about h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            max-width: 850px;
+            margin: auto;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 600px) {
 
-            .navbar {
+            nav {
+                padding: 15px 20px;
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
             }
 
-            .service-container {
-                grid-template-columns: 1fr;
+            nav a {
+                margin-left: 10px;
+                margin-right: 10px;
             }
 
-            .hero h1 {
-                font-size: 38px;
+            .hero h2 {
+                font-size: 28px;
             }
 
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            .modules {
+                padding: 35px 20px;
             }
-
         }
-
     </style>
 
 </head>
 
-
 <body>
 
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
 
-    <!-- Navigation Bar -->
+    <nav>
 
-    <nav class="navbar">
+        <h1>AgriGuide AI</h1>
 
-        <div class="logo">
-            AgriGuide AI
-        </div>
+        <div>
+            <a href="{{ url_for('home') }}">Home</a>
 
-        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
 
-            <a href="{{ url_for('home') }}">
-                Home
-            </a>
-
-            <a href="{{ url_for('login') }}">
-                Login
-            </a>
-
-            <a href="{{ url_for('register') }}">
-                Register
-            </a>
-
+            <a href="{{ url_for('logout') }}">Logout</a>
         </div>
 
     </nav>
 
 
-
-    <!-- Hero Section -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
     <section class="hero">
 
-        <h1>
-            Smart Farming with AI
-        </h1>
+        <h2>Welcome to AgriGuide AI</h2>
 
         <p>
-            Get intelligent crop recommendations, weather information
-            and farming guidance.
+            Your intelligent farming assistance platform.
+            Get crop recommendations, weather-based guidance,
+            irrigation suggestions, farming advice and
+            AI-powered plant disease detection.
         </p>
 
-
-        <div class="hero-buttons">
-
-            <a href="{{ url_for('crop_recommendation') }}"
-               class="hero-button">
-
-                Get Started
-
-            </a>
-
-
-            <a href="{{ url_for('login') }}"
-               class="hero-button">
-
-                Login
-
-            </a>
-
-        </div>
-
     </section>
 
 
+    <!-- =========================
+         MODULES
+    ========================= -->
 
-    <!-- Services Section -->
+    <section class="modules">
 
-    <section class="services">
-
-        <h2>
-            Our Services
-        </h2>
-
-
-        <div class="service-container">
+        <h2>Our Farming Modules</h2>
 
 
-            <!-- Crop Recommendation -->
+        <div class="card-container">
 
-            <a href="{{ url_for('crop_recommendation') }}"
-               class="service-card">
 
-                <h3>
-                    Crop Recommendation
-                </h3>
+            <!-- =========================
+                 CROP RECOMMENDATION
+            ========================= -->
+
+            <div class="card">
+
+                <h3>Crop Recommendation</h3>
 
                 <p>
-                    Get AI-based crop recommendations using
-                    soil and weather conditions.
+                    Get suitable crop recommendations
+                    based on soil and environmental
+                    conditions.
                 </p>
 
-                <span class="service-button">
-                    Explore
-                </span>
-
-            </a>
-
-
-
-            <!-- Weather Advisory -->
-
-            <a href="{{ url_for('weather_advisory') }}"
-               class="service-card">
-
-                <h3>
-                    Weather Advisory
-                </h3>
-
-                <p>
-                    Get weather-based farming guidance
-                    using temperature, humidity and rainfall.
-                </p>
-
-                <span class="service-button">
-                    Explore
-                </span>
-
-            </a>
-
-
-
-            <!-- Irrigation Recommendation -->
-
-            <a href="{{ url_for('irrigation') }}"
-               class="service-card">
-
-                <h3>
-                    Irrigation Recommendation
-                </h3>
-
-                <p>
-                    Get irrigation recommendations based on
-                    soil moisture and weather conditions.
-                </p>
-
-                <span class="service-button">
-                    Explore
-                </span>
-
-            </a>
-
-
-
-            <!-- Farming Advisories -->
-
-            <div class="service-card">
-
-                <h3>
-                    Farming Advisories
-                </h3>
-
-                <p>
-                    Read useful farming tips and
-                    agricultural advisories.
-                </p>
-
-                <span class="service-button">
-                    Coming Soon
-                </span>
+                <a href="{{ url_for('crop_recommendation') }}">
+                    Get Recommendation
+                </a>
 
             </div>
 
 
+            <!-- =========================
+                 WEATHER ADVISORY
+            ========================= -->
 
-            <!-- My History -->
+            <div class="card">
 
-            <div class="service-card">
-
-                <h3>
-                    My History
-                </h3>
+                <h3>Weather Advisory</h3>
 
                 <p>
-                    View your previous farming
-                    activities.
+                    Get farming guidance based on
+                    weather conditions to help you
+                    plan agricultural activities.
                 </p>
 
-                <span class="service-button">
-                    Coming Soon
+                <a href="{{ url_for('weather_advisory') }}">
+                    View Weather Advisory
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 IRRIGATION
+            ========================= -->
+
+            <div class="card">
+
+                <h3>Irrigation Guidance</h3>
+
+                <p>
+                    Get useful irrigation guidance
+                    to manage water efficiently
+                    for your crops.
+                </p>
+
+                <a href="{{ url_for('irrigation') }}">
+                    View Irrigation
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 FARMING ADVISORY
+            ========================= -->
+
+            <div class="card">
+
+                <h3>Farming Advisory</h3>
+
+                <p>
+                    Access useful farming guidance
+                    and recommendations for better
+                    crop management.
+                </p>
+
+                <a href="{{ url_for('farming_advisory') }}">
+                    View Advisory
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 PLANT DISEASE DETECTION
+            ========================= -->
+
+            <div class="card disease-card">
+
+                <span class="ai-label">
+                    AI POWERED
                 </span>
+
+                <h3>Plant Disease Detection</h3>
+
+                <p>
+                    Upload a plant leaf image and use
+                    Artificial Intelligence to identify
+                    possible plant diseases.
+                </p>
+
+                <a href="{{ url_for('plant_disease') }}">
+                    Detect Plant Disease
+                </a>
 
             </div>
 
@@ -404,6 +386,41 @@
         </div>
 
     </section>
+
+
+    <!-- =========================
+         ABOUT AGRIGUIDE AI
+    ========================= -->
+
+    <section class="about">
+
+        <h2>About AgriGuide AI</h2>
+
+        <p>
+            AgriGuide AI is a smart farming assistance
+            platform designed to support farmers with
+            technology-based agricultural guidance.
+            The platform combines crop recommendation,
+            weather advisory, irrigation guidance,
+            farming advisory and AI-based plant disease
+            detection to provide useful information
+            for crop management.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <p>
+            © 2026 AgriGuide AI | Smart Farming Assistance
+        </p>
+
+    </footer>
 
 
 </body>
