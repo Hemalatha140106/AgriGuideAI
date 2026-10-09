@@ -1,207 +1,200 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-    <title>AgriGuide AI - Dashboard</title>
-
-    <style>
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #eef7e8;
-        }
-
-        nav {
-            background-color: #2e7d32;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav h2 {
-            color: white;
-            margin: 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: bold;
-        }
-
-        .welcome {
-            text-align: center;
-            padding: 60px 20px 30px;
-        }
-
-        .welcome h1 {
-            color: #234d20;
-            font-size: 40px;
-        }
-
-        .welcome p {
-            font-size: 20px;
-            color: #444;
-        }
-
-        .services {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            padding: 30px 8%;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: white;
-            width: 250px;
-            padding: 30px;
-            text-align: center;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px #cccccc;
-        }
-
-        .card h2 {
-            color: #2e7d32;
-        }
-
-        .card p {
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .button {
-            display: inline-block;
-            background-color: #2e7d32;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .button:hover {
-            background-color: #1b5e20;
-        }
-
-    </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | AgriGuideAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
 
+<div class="app-shell">
 
-    <nav>
+    <aside class="app-sidebar">
+        <a href="{{ url_for('dashboard') }}" class="sidebar-brand">
+            <span class="brand-mark">✳</span>
+            AgriGuideAI
+        </a>
 
-        <h2>AgriGuide AI</h2>
+        <div class="sidebar-caption">Workspace</div>
 
-        <div>
-
-            <a href="/">Home</a>
-
-            <a href="/logout">Logout</a>
-
-        </div>
-
-    </nav>
-
-
-    <section class="welcome">
-
-        <h1>Welcome {{ name }}!</h1>
-
-        <p>
-            Welcome to your AgriGuide AI farming dashboard.
-        </p>
-
-        <p>
-            Get intelligent farming guidance and crop recommendations.
-        </p>
-
-    </section>
-
-
-    <section class="services">
-
-
-        <!-- Crop Recommendation -->
-
-        <div class="card">
-
-            <h2>Crop Recommendation</h2>
-
-            <p>
-                Get AI-based crop recommendations
-                using soil and weather conditions.
-            </p>
-
-            <a href="/crop-recommendation" class="button">
-                Explore
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('dashboard') }}" class="sidebar-link active">
+                <span class="sidebar-icon">⌂</span> Dashboard
             </a>
-
-        </div>
-
-
-        <!-- Weather -->
-
-        <div class="card">
-
-            <h2>Weather</h2>
-
-            <p>
-                View weather information and
-                receive weather-based farming guidance.
-            </p>
-
-            <a href="#" class="button">
-                View Weather
+            <a href="{{ url_for('crop_recommendation') }}" class="sidebar-link">
+                <span class="sidebar-icon">✳</span> Crop recommendation
             </a>
-
-        </div>
-
-
-        <!-- Farming Advisories -->
-
-        <div class="card">
-
-            <h2>Farming Advisories</h2>
-
-            <p>
-                Read useful farming tips,
-                crop guidance and agricultural advisories.
-            </p>
-
-            <a href="#" class="button">
-                Read Advisories
+            <a href="{{ url_for('weather_advisory') }}" class="sidebar-link">
+                <span class="sidebar-icon">☼</span> Weather advisory
             </a>
-
-        </div>
-
-
-        <!-- History -->
-
-        <div class="card">
-
-            <h2>My History</h2>
-
-            <p>
-                View your previous crop recommendations
-                and farming activities.
-            </p>
-
-            <a href="#" class="button">
-                View History
+            <a href="{{ url_for('farming_advisory') }}" class="sidebar-link">
+                <span class="sidebar-icon">❋</span> Farming advisory
             </a>
+            <a href="{{ url_for('irrigation') }}" class="sidebar-link">
+                <span class="sidebar-icon">◉</span> Irrigation guidance
+            </a>
+            <a href="{{ url_for('plant_disease') }}" class="sidebar-link">
+                <span class="sidebar-icon">❀</span> Plant disease detection
+            </a>
+            <a href="{{ url_for('my_history') }}" class="sidebar-link">
+                <span class="sidebar-icon">▤</span> My history
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    {{ (name or 'F')[0]|upper }}
+                </div>
+                <div class="profile-info">
+                    <strong>{{ name or 'Farmer' }}</strong>
+                    <span>Farmer account</span>
+                </div>
+            </div>
+
+            <a href="{{ url_for('logout') }}" class="sidebar-logout">
+                ↗ &nbsp; Sign out
+            </a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+
+        <header class="app-topbar">
+            <div>
+                <div class="topbar-label">AGRIGUIDEAI / WORKSPACE</div>
+                <div class="topbar-title">Your farming workspace</div>
+            </div>
+
+            <div class="topbar-user">
+                <div class="profile-avatar">
+                    {{ (name or 'F')[0]|upper }}
+                </div>
+                <span>{{ name or 'Farmer' }}</span>
+            </div>
+        </header>
+
+        <div class="app-content">
+
+            <section class="app-heading">
+                <div>
+                    <span class="eyebrow">Your dashboard</span>
+                    <h1>Welcome back, {{ name }}.</h1>
+                    <p>
+                        Your farming guidance tools are ready.
+                        Choose a service to get started.
+                    </p>
+                </div>
+            </section>
+
+            <section class="dashboard-banner">
+                <div>
+                    <span class="eyebrow">Smart farming starts here</span>
+                    <h2>Grow smarter. Farm with confidence.</h2>
+                    <p>
+                        Explore crop recommendations, monitor weather
+                        conditions, review irrigation guidance and use
+                        AI-powered plant disease detection from one place.
+                    </p>
+                </div>
+                <div class="banner-mark" aria-hidden="true">✳</div>
+            </section>
+
+            <section>
+                <div class="feature-section-heading">
+                    <div>
+                        <h2>Your farming tools</h2>
+                        <p>Select a tool to open its workspace.</p>
+                    </div>
+                </div>
+
+                <div class="app-feature-grid">
+
+                    <article class="app-feature-card">
+                        <div class="app-feature-icon">✳</div>
+                        <h3>Crop recommendation</h3>
+                        <p>
+                            Enter soil nutrients and environmental
+                            values to receive a crop suggestion.
+                        </p>
+                        <a href="{{ url_for('crop_recommendation') }}" class="feature-action">
+                            Open tool <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="app-feature-card">
+                        <div class="app-feature-icon">☼</div>
+                        <h3>Weather advisory</h3>
+                        <p>
+                            Get farming guidance based on temperature,
+                            humidity and rainfall values.
+                        </p>
+                        <a href="{{ url_for('weather_advisory') }}" class="feature-action">
+                            Open tool <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="app-feature-card">
+                        <div class="app-feature-icon">❋</div>
+                        <h3>Farming advisory</h3>
+                        <p>
+                            Explore guidance for fertilizer, pests,
+                            disease prevention, water and soil.
+                        </p>
+                        <a href="{{ url_for('farming_advisory') }}" class="feature-action">
+                            Open tool <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="app-feature-card">
+                        <div class="app-feature-icon">◉</div>
+                        <h3>Irrigation guidance</h3>
+                        <p>
+                            Review irrigation recommendations using
+                            soil moisture and weather inputs.
+                        </p>
+                        <a href="{{ url_for('irrigation') }}" class="feature-action">
+                            Open tool <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="app-feature-card">
+                        <div class="app-feature-icon">❀</div>
+                        <h3>Plant disease detection</h3>
+                        <p>
+                            Upload a leaf image and view the prediction
+                            from your existing AI model.
+                        </p>
+                        <a href="{{ url_for('plant_disease') }}" class="feature-action">
+                            Open tool <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="app-feature-card">
+                        <div class="app-feature-icon">▤</div>
+                        <h3>My history</h3>
+                        <p>
+                            Review previously saved crop recommendations
+                            and farming activity records.
+                        </p>
+                        <a href="{{ url_for('my_history') }}" class="feature-action">
+                            View history <span>→</span>
+                        </a>
+                    </article>
+
+                </div>
+            </section>
 
         </div>
 
+        <footer class="app-footer">
+            AgriGuideAI © 2026 · Smart Crop Advisory and Farming Guidance
+        </footer>
 
-    </section>
-
+    </main>
+</div>
 
 </body>
 </html>

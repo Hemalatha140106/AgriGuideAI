@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriGuide AI - Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f8e9;
+            color: #263b28;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #1b5e20;
+            color: white;
+            padding: 22px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 27px;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        .logout {
+            background: white;
+            color: #1b5e20;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 38px 20px 25px;
+        }
+
+        .welcome h2 {
+            color: #1b5e20;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            color: #526653;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1200px;
+            margin: 15px auto 50px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px 23px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid #43a047;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            color: #1b5e20;
+            font-size: 21px;
+            margin-bottom: 14px;
+        }
+
+        .card p {
+            color: #5d6d5e;
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 75px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            text-decoration: none;
+            padding: 11px 17px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #1b5e20;
+        }
+
+        footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            .welcome h2 {
+                font-size: 25px;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1>AgriGuide AI</h1>
+            <p>Smart Crop Advisory and Farming Guidance Platform</p>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+    </header>
+
+    <section class="welcome">
+        <h2>Welcome, {{ name }}!</h2>
+        <p>Choose a service below to access your farming guidance tools.</p>
+    </section>
+
+    <main class="container">
+        <div class="features">
+
+            <div class="card">
+                <h3>Crop Recommendation</h3>
+                <p>
+                    Get crop suggestions based on your soil and weather
+                    input values.
+                </p>
+                <a href="{{ url_for('crop_recommendation') }}" class="button">
+                    Explore
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Weather Advisory</h3>
+                <p>
+                    Access weather-based farming guidance for your
+                    agricultural activities.
+                </p>
+                <a href="{{ url_for('weather_advisory') }}" class="button">
+                    View Weather
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Farming Advisory</h3>
+                <p>
+                    Open farming guidance and recommendations to support
+                    your agricultural decisions.
+                </p>
+                <a href="{{ url_for('farming_advisory') }}" class="button">
+                    Read Advisories
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Irrigation Guidance</h3>
+                <p>
+                    Get irrigation guidance based on soil moisture and
+                    other environmental conditions.
+                </p>
+                <a href="{{ url_for('irrigation') }}" class="button">
+                    View Irrigation
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Plant Disease Detection</h3>
+                <p>
+                    Upload a plant image to check it using your existing
+                    plant disease detection model.
+                </p>
+                <a href="{{ url_for('plant_disease') }}" class="button">
+                    Detect Disease
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>My History</h3>
+                <p>
+                    View your previously saved crop recommendations,
+                    input values, and dates.
+                </p>
+                <a href="{{ url_for('my_history') }}" class="button">
+                    View History
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>AgriGuide AI &copy; 2026 | Smart Farming Support System</p>
+    </footer>
+
+</body>
+</html>
+
+

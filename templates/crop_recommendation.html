@@ -1,166 +1,268 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Crop Recommendation - AgriGuideAI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation | AgriGuide AI</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #eef8e9;
             margin: 0;
-            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f1f8f0;
+            color: #26352a;
+        }
+
+        nav {
+            background: #216b3a;
+            color: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        nav h2 {
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
         }
 
         .container {
-            max-width: 800px;
-            margin: auto;
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 25px;
+        }
+
+        .card {
             background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px #00000012;
         }
 
         h1 {
-            text-align: center;
-            color: #236b2d;
+            color: #216b3a;
+            margin-top: 0;
         }
 
-        .subtitle {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 30px;
+        .description {
+            color: #667267;
+            line-height: 1.6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 25px;
         }
 
         label {
             display: block;
-            font-size: 18px;
             font-weight: bold;
-            margin-top: 18px;
+            margin-bottom: 7px;
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            margin-top: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 12px;
+            border: 1px solid #cbd7cb;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #72b783;
+            border-color: #216b3a;
         }
 
         button {
+            margin-top: 25px;
             width: 100%;
-            padding: 16px;
-            margin-top: 30px;
-            background-color: #2d8435;
+            padding: 14px;
+            background: #216b3a;
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 20px;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #236b2d;
+            background: #174e2a;
         }
 
         .result {
-            margin-top: 35px;
-            padding: 30px;
-            background-color: #e5f5e7;
-            border-radius: 15px;
-            text-align: center;
+            margin-top: 25px;
+            padding: 22px;
+            background: #e4f5e7;
+            border-left: 5px solid #268345;
+            border-radius: 8px;
         }
 
         .result h2 {
-            color: #23752e;
-            font-size: 30px;
+            color: #216b3a;
+            margin-top: 0;
         }
 
-        .crop-name {
-            color: #166b24;
-            font-size: 34px;
-            font-weight: bold;
+        .result strong {
+            font-size: 22px;
         }
 
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 25px;
-            color: #23752e;
-            font-size: 20px;
-            font-weight: bold;
+        .message {
+            background: #fff0ed;
+            color: #9b2c20;
+            padding: 12px;
+            border-radius: 7px;
+            margin: 15px 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #216b3a;
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 15px auto;
+                padding: 12px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
-
-<div class="container">
-
-    <h1>Crop Recommendation</h1>
-
-    <p class="subtitle">
-        Enter your soil and weather details to get an AI-based crop recommendation.
-    </p>
-
-    <form method="POST" action="/crop-recommendation">
-
-        <label>Nitrogen (N)</label>
-        <input type="number" name="nitrogen" step="any" required>
-
-        <label>Phosphorus (P)</label>
-        <input type="number" name="phosphorus" step="any" required>
-
-        <label>Potassium (K)</label>
-        <input type="number" name="potassium" step="any" required>
-
-        <label>Temperature (°C)</label>
-        <input type="number" name="temperature" step="any" required>
-
-        <label>Humidity (%)</label>
-        <input type="number" name="humidity" step="any" required>
-
-        <label>pH</label>
-        <input type="number" name="ph" step="any" required>
-
-        <label>Rainfall (mm)</label>
-        <input type="number" name="rainfall" step="any" required>
-
-        <button type="submit">
-            Get Crop Recommendation
-        </button>
-
-    </form>
-
-
-    {% if crop %}
-
-    <div class="result">
-
-        <h2>Recommended Crop</h2>
-
-        <div class="crop-name">
-            {{ crop }}
+    <nav>
+        <h2>AgriGuide AI</h2>
+        <div>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('my_history') }}">My History</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
         </div>
+    </nav>
 
-        <p>
-            This recommendation is based on the entered
-            soil and weather conditions.
-        </p>
+    <main class="container">
+        <section class="card">
+            <h1>Crop Recommendation</h1>
 
-    </div>
+            <p class="description">
+                Enter your soil nutrient levels and environmental
+                conditions to receive a crop recommendation.
+            </p>
 
-    {% endif %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endwith %}
 
+            <form method="POST"
+                  action="{{ url_for('crop_recommendation') }}">
 
-    <a class="back" href="/home">
-        ← Back to Home
-    </a>
+                <div class="form-grid">
+                    <div>
+                        <label for="nitrogen">Nitrogen (N)</label>
+                        <input id="nitrogen" name="nitrogen"
+                               type="number" step="any" min="0"
+                               value="{{ values.get('nitrogen', '') }}"
+                               required>
+                    </div>
 
-</div>
+                    <div>
+                        <label for="phosphorus">Phosphorus (P)</label>
+                        <input id="phosphorus" name="phosphorus"
+                               type="number" step="any" min="0"
+                               value="{{ values.get('phosphorus', '') }}"
+                               required>
+                    </div>
 
+                    <div>
+                        <label for="potassium">Potassium (K)</label>
+                        <input id="potassium" name="potassium"
+                               type="number" step="any" min="0"
+                               value="{{ values.get('potassium', '') }}"
+                               required>
+                    </div>
+
+                    <div>
+                        <label for="temperature">Temperature (°C)</label>
+                        <input id="temperature" name="temperature"
+                               type="number" step="any"
+                               value="{{ values.get('temperature', '') }}"
+                               required>
+                    </div>
+
+                    <div>
+                        <label for="humidity">Humidity (%)</label>
+                        <input id="humidity" name="humidity"
+                               type="number" step="any" min="0" max="100"
+                               value="{{ values.get('humidity', '') }}"
+                               required>
+                    </div>
+
+                    <div>
+                        <label for="ph">Soil pH</label>
+                        <input id="ph" name="ph"
+                               type="number" step="any" min="0" max="14"
+                               value="{{ values.get('ph', '') }}"
+                               required>
+                    </div>
+
+                    <div>
+                        <label for="rainfall">Rainfall (mm)</label>
+                        <input id="rainfall" name="rainfall"
+                               type="number" step="any" min="0"
+                               value="{{ values.get('rainfall', '') }}"
+                               required>
+                    </div>
+                </div>
+
+                <button type="submit">Recommend Crop</button>
+            </form>
+
+            {% if recommendation %}
+                <div class="result">
+                    <h2>Recommendation Result</h2>
+                    <p>Based on the entered conditions, the suggested crop is:</p>
+                    <strong>{{ recommendation }}</strong>
+                    <p>
+                        This is a basic rule-based suggestion.
+                        Confirm suitability using local agricultural
+                        guidance and soil test results.
+                    </p>
+                </div>
+            {% endif %}
+
+            <a class="back-link" href="{{ url_for('home') }}">
+                &larr; Back to Home
+            </a>
+        </section>
+    </main>
 </body>
 </html>

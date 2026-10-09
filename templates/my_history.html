@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My History | AgriGuide AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8f3;
+            color: #24352a;
+        }
+
+        .navbar {
+            background: #1f6b43;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 35px auto;
+            padding: 0 20px 40px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            color: #1f6b43;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #637267;
+            line-height: 1.6;
+        }
+
+        .section {
+            background: white;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            overflow-x: auto;
+        }
+
+        .section h2 {
+            color: #1f6b43;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th, td {
+            padding: 13px 12px;
+            border-bottom: 1px solid #e6ece6;
+            text-align: left;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #edf6ef;
+            color: #205c3b;
+        }
+
+        tr:hover td {
+            background: #fafdf9;
+        }
+
+        .empty {
+            background: #f7faf7;
+            padding: 22px;
+            border-radius: 10px;
+            color: #647268;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e4f4e8;
+            color: #20653e;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 11px 18px;
+            background: #1f6b43;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .button.secondary {
+            background: white;
+            color: #1f6b43;
+            border: 1px solid #1f6b43;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #758078;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 16px 5%;
+            }
+
+            .brand {
+                font-size: 20px;
+            }
+
+            .container {
+                margin-top: 24px;
+                padding: 0 12px 30px;
+            }
+
+            .section {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="brand">AgriGuide AI</div>
+
+        <nav class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('crop_recommendation') }}">Crop Recommendation</a>
+            <a href="{{ url_for('farming_advisory') }}">Farming Advisory</a>
+            <a href="{{ url_for('irrigation') }}">Irrigation</a>
+            <a href="{{ url_for('my_history') }}">My History</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <div class="page-heading">
+            <h1>My Farming History</h1>
+            <p>
+                Welcome, {{ farmer_name | default('Farmer') }}.
+                Review your saved crop recommendations and farming activities.
+            </p>
+        </div>
+
+        <!-- Crop recommendation history -->
+        <section class="section">
+            <h2>Crop Recommendation History</h2>
+
+            {% if crop_history %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Recommended Crop</th>
+                            <th>Nitrogen</th>
+                            <th>Phosphorus</th>
+                            <th>Potassium</th>
+                            <th>Temperature</th>
+                            <th>Humidity</th>
+                            <th>pH</th>
+                            <th>Rainfall</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in crop_history %}
+                        <tr>
+                            <td>
+                                {{ item.created_at.strftime('%d-%m-%Y %H:%M')
+                                   if item.created_at else 'N/A' }}
+                            </td>
+                            <td><span class="badge">{{ item.crop }}</span></td>
+                            <td>{{ item.nitrogen if item.nitrogen is not none else 'N/A' }}</td>
+                            <td>{{ item.phosphorus if item.phosphorus is not none else 'N/A' }}</td>
+                            <td>{{ item.potassium if item.potassium is not none else 'N/A' }}</td>
+                            <td>{{ item.temperature if item.temperature is not none else 'N/A' }}</td>
+                            <td>{{ item.humidity if item.humidity is not none else 'N/A' }}</td>
+                            <td>{{ item.ph if item.ph is not none else 'N/A' }}</td>
+                            <td>{{ item.rainfall if item.rainfall is not none else 'N/A' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="empty">
+                    No crop recommendations have been saved yet.
+                    Visit the Crop Recommendation page and submit your inputs
+                    to see your results here.
+                </div>
+            {% endif %}
+        </section>
+
+        <!-- Activity history -->
+        <section class="section">
+            <h2>Recent Farming Activities</h2>
+
+            {% if activity_history %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Activity</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in activity_history %}
+                        <tr>
+                            <td>
+                                {{ item.created_at.strftime('%d-%m-%Y %H:%M')
+                                   if item.created_at else 'N/A' }}
+                            </td>
+                            <td>
+                                {{ item.activity_type | default('Activity') }}
+                            </td>
+                            <td>
+                                {{ item.details | default('No additional details', true) }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="empty">
+                    No farming activities have been recorded yet.
+                    Your activities will appear here when they are saved.
+                </div>
+            {% endif %}
+        </section>
+
+        <div class="actions">
+            <a class="button"
+               href="{{ url_for('crop_recommendation') }}">
+                Get Crop Recommendation
+            </a>
+
+            <a class="button secondary"
+               href="{{ url_for('dashboard') }}">
+                Back to Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        AgriGuide AI — Smart Farming Guidance Platform
+    </footer>
+
+</body>
+</html>
+

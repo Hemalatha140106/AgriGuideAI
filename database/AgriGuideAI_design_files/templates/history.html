@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My History - AgriGuideAI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f7f0;
+            margin: 0;
+            padding: 20px;
+            color: #24352a;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 25px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #237a3b;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .summary {
+            background: #e7f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #d5e2d5;
+            padding: 13px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #237a3b;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f8f2;
+        }
+
+        .module {
+            font-weight: bold;
+            color: #237a3b;
+            min-width: 170px;
+        }
+
+        .details {
+            min-width: 300px;
+            overflow-wrap: anywhere;
+        }
+
+        .empty {
+            background: #f2f8f2;
+            padding: 25px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #237a3b;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            margin: 5px;
+            border-radius: 6px;
+        }
+
+        .button:hover {
+            background: #185d2b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>My AgriGuideAI History</h1>
+
+        <p class="subtitle">
+            Welcome, {{ name }}. View your activity across all modules.
+        </p>
+
+        <div class="summary">
+            <strong>Total recorded activities: {{ history|length }}</strong>
+        </div>
+
+        {% if history %}
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date and Time</th>
+                        <th>Module</th>
+                        <th>Activity Details</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in history %}
+                    <tr>
+                        <td>
+                            {{ item.created_at.strftime('%d-%m-%Y %I:%M %p') if item.created_at else 'N/A' }}
+                        </td>
+
+                        <td class="module">
+                            {{ item.activity_type }}
+                        </td>
+
+                        <td class="details">
+                            {{ item.details }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% else %}
+        <div class="empty">
+            <h3>No history available yet</h3>
+            <p>
+                Use the AgriGuideAI modules while logged in.
+                Your recorded activities will appear here.
+            </p>
+        </div>
+        {% endif %}
+
+        <div class="buttons">
+            <a class="button" href="{{ url_for('dashboard') }}">
+                Back to Dashboard
+            </a>
+
+            <a class="button" href="{{ url_for('crop_recommendation') }}">
+                Crop Recommendation
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+

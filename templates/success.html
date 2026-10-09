@@ -1,82 +1,78 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-    <title>Registration Successful</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful | AgriGuide AI</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-
+        * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f1f8e9;
-        }
-
-        nav {
-            background: #2e7d32;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
-            color: white;
+            font-family: Arial, sans-serif;
+            background: #f3f7ef;
+            color: #203b2b;
         }
-
-        .logo {
-            font-size: 25px;
-            font-weight: bold;
-        }
-
-        .box {
-            width: 500px;
-            margin: 100px auto;
-            padding: 50px;
-            background: white;
+        .success-card {
+            width: 100%;
+            max-width: 520px;
+            padding: 42px 30px;
             text-align: center;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px #cccccc;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(30, 70, 40, 0.12);
         }
-
-        h1 {
-            color: #2e7d32;
+        .success-icon {
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e1f4df;
+            color: #287442;
+            font-size: 42px;
         }
-
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        a {
+        h1 { margin: 0 0 14px; font-size: 28px; }
+        p { color: #637368; line-height: 1.7; }
+        .action-link {
             display: inline-block;
             margin-top: 20px;
-            padding: 15px 30px;
-            background: #2e7d32;
+            padding: 14px 28px;
+            border-radius: 12px;
+            background: #246b43;
             color: white;
             text-decoration: none;
-            border-radius: 8px;
+            font-weight: bold;
         }
-
+        .action-link:hover { background: #194f31; }
+        .brand {
+            margin-bottom: 22px;
+            color: #246b43;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
     </style>
-
 </head>
-
 <body>
-
-    <nav>
-        <div class="logo">AgriGuide AI</div>
-    </nav>
-
-    <div class="box">
-
+    <main class="success-card">
+        <div class="brand">AgriGuide AI</div>
+        <div class="success-icon">&#10003;</div>
         <h1>Registration Successful!</h1>
-
-        <p>
-            Your farmer account has been created successfully.
-        </p>
-
-        <p>
-            You can now login and access your farming guidance.
-        </p>
-
-        <a href="/login">Go to Login</a>
-
-    </div>
-
+        <p>Your farmer account has been created successfully.</p>
+        <p>Sign in to explore crop recommendations and farming guidance.</p>
+        <a class="action-link" href="{{ url_for('login') }}">
+            Continue to Login
+        </a>
+    </main>
 </body>
 </html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AgriGuide AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #eef7e8;
+        }
+
+        nav {
+            background-color: #2e7d32;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            color: #234d20;
+            font-size: 45px;
+        }
+
+        .hero p {
+            font-size: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .services {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 220px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px #cccccc;
+        }
+
+        .card h2 {
+            color: #2e7d32;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h2>AgriGuide AI</h2>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+
+        <h1>Smart Farming with AI</h1>
+
+        <p>
+            Get intelligent crop recommendations,
+            weather information and farming guidance.
+        </p>
+
+        <a href="/register" class="button">
+            Get Started
+        </a>
+
+        <a href="/login" class="button">
+            Login
+        </a>
+
+    </section>
+
+
+    <section class="services">
+
+        <h1>Our Services</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>Crop Recommendation</h2>
+                <p>
+                    Get AI-based crop recommendations
+                    using soil and weather conditions.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Weather</h2>
+                <p>
+                    View weather information and
+                    farming guidance.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Farming Advisories</h2>
+                <p>
+                    Read useful farming tips and
+                    agricultural advisories.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>My History</h2>
+                <p>
+                    View your previous farming activities.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

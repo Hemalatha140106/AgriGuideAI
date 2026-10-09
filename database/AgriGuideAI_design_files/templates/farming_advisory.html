@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farming Advisory - AgriGuide AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef8e9;
+            padding: 30px;
+            color: #111;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #236b2d;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 30px;
+            background-color: #2d8435;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #236b2d;
+        }
+
+        .result {
+            margin-top: 35px;
+            padding: 30px;
+            background-color: #e5f5e7;
+            border-radius: 15px;
+        }
+
+        .result h2 {
+            text-align: center;
+            color: #23752e;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .advisory {
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .advisory ul {
+            padding-left: 25px;
+        }
+
+        .advisory li {
+            margin-bottom: 12px;
+        }
+
+        .error {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #ffe5e5;
+            color: #b30000;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #23752e;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>Farming Advisory</h1>
+
+    <p class="subtitle">
+        Select your crop and farming problem to receive useful
+        agricultural guidance.
+    </p>
+
+
+    <form method="POST" action="/farming-advisory">
+
+        <label>Select Crop</label>
+
+        <select name="crop" required>
+
+            <option value="">-- Select Crop --</option>
+
+            <option value="Rice">Rice</option>
+
+            <option value="Wheat">Wheat</option>
+
+            <option value="Maize">Maize</option>
+
+            <option value="Cotton">Cotton</option>
+
+            <option value="Sugarcane">Sugarcane</option>
+
+            <option value="Groundnut">Groundnut</option>
+
+            <option value="Millet">Millet</option>
+
+        </select>
+
+
+        <label>Select Farming Problem</label>
+
+        <select name="problem" required>
+
+            <option value="">-- Select Problem --</option>
+
+            <option value="Fertilizer Management">
+                Fertilizer Management
+            </option>
+
+            <option value="Pest Management">
+                Pest Management
+            </option>
+
+            <option value="Disease Prevention">
+                Disease Prevention
+            </option>
+
+            <option value="Water Management">
+                Water Management
+            </option>
+
+            <option value="Soil Management">
+                Soil Management
+            </option>
+
+        </select>
+
+
+        <button type="submit">
+            Get Farming Advisory
+        </button>
+
+    </form>
+
+
+    {% if error %}
+
+    <div class="error">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+
+    {% if advisory %}
+
+    <div class="result">
+
+        <h2>
+            Farming Advisory
+        </h2>
+
+        <div class="advisory">
+
+            <p>
+                <strong>Crop:</strong> {{ selected_crop }}
+            </p>
+
+            <p>
+                <strong>Concern:</strong> {{ selected_problem }}
+            </p>
+
+            <br>
+
+            <ul>
+
+                {% for advice in advisory %}
+
+                <li>
+                    {{ advice }}
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <a class="back" href="/home">
+        ← Back to Home
+    </a>
+
+</div>
+
+</body>
+
+</html>

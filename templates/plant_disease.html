@@ -1,277 +1,256 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Plant Disease Detection - AgriGuide AI</title>
+    <title>Plant Disease Detection | AgriGuide AI</title>
 
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
         }
 
         body {
-            background: #f1f8f3;
-            color: #1b4332;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f8f0;
+            color: #26352a;
         }
 
         nav {
-            background: #2d6a4f;
-            padding: 18px 50px;
+            background: #216b3a;
+            color: white;
+            padding: 16px 7%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         nav h2 {
-            color: white;
+            margin: 0;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 15px;
             font-weight: bold;
         }
 
         .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 40px auto;
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 20px;
         }
 
         .card {
             background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            text-align: center;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px #00000012;
+        }
+
+        h1, h2 {
+            color: #216b3a;
         }
 
         h1 {
-            margin-bottom: 15px;
-            color: #1b4332;
+            margin-top: 0;
         }
 
         .description {
-            color: #555;
-            margin-bottom: 30px;
+            color: #667267;
+            line-height: 1.7;
         }
 
         .upload-box {
-            border: 2px dashed #52b788;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 25px;
+            margin-top: 25px;
+            padding: 25px;
+            border: 2px dashed #9abda1;
+            border-radius: 10px;
+            background: #f9fcf8;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 12px;
         }
 
         input[type="file"] {
-            margin: 15px;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd7cb;
+            border-radius: 7px;
+            background: white;
         }
 
         button {
-            background: #2d6a4f;
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            background: #216b3a;
             color: white;
             border: none;
-            padding: 13px 30px;
             border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
 
         button:hover {
-            background: #1b4332;
+            background: #174e2a;
         }
 
-        .error {
-            background: #ffe5e5;
-            color: #b00020;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 25px;
+        .message {
+            margin-top: 18px;
+            padding: 13px;
+            background: #fff0ed;
+            color: #9b2c20;
+            border-radius: 7px;
         }
 
         .result {
-            margin-top: 30px;
-            padding: 25px;
-            background: #e8f5e9;
-            border-radius: 12px;
-            border-left: 6px solid #2d6a4f;
+            margin-top: 28px;
+            padding: 22px;
+            background: #e4f5e7;
+            border-left: 5px solid #268345;
+            border-radius: 8px;
         }
 
         .result h2 {
-            color: #1b4332;
-            margin-bottom: 15px;
+            margin-top: 0;
         }
 
-        .disease {
-            font-size: 22px;
+        .prediction {
+            font-size: 21px;
             font-weight: bold;
-            color: #2d6a4f;
-            margin: 15px 0;
+            overflow-wrap: anywhere;
         }
 
-        .confidence {
-            font-size: 18px;
-            margin-bottom: 10px;
+        .preview {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            max-height: 400px;
+            object-fit: contain;
+            margin-top: 18px;
+            border-radius: 8px;
+            border: 1px solid #d5e0d5;
         }
 
-        .info {
-            margin-top: 30px;
-            text-align: left;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
+        .back-link {
+            display: inline-block;
+            margin-top: 22px;
+            color: #216b3a;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .info h3 {
-            margin-bottom: 10px;
-        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 15px auto;
+                padding: 12px;
+            }
 
-        .info p {
-            margin-bottom: 8px;
-            color: #444;
-        }
+            .card {
+                padding: 20px;
+            }
 
-        .note {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
+            nav a {
+                margin-left: 8px;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <nav>
         <h2>AgriGuide AI</h2>
-
         <div>
-            <a href="/home">Home</a>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/logout">Logout</a>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('my_history') }}">My History</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
         </div>
     </nav>
 
-
-    <div class="container">
-
-        <div class="card">
-
+    <main class="container">
+        <section class="card">
             <h1>Plant Disease Detection</h1>
 
             <p class="description">
-                Upload a clear image of a plant leaf and our AI model
-                will analyze it for possible plant diseases.
+                Upload a clear image of a plant leaf. AgriGuide AI
+                will analyse the image using the configured
+                plant disease classification model.
             </p>
 
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endwith %}
 
-            <!-- IMAGE UPLOAD FORM -->
+            <div class="upload-box">
+                <form method="POST"
+                      action="{{ url_for('plant_disease') }}"
+                      enctype="multipart/form-data">
 
-            <form method="POST"
-                  action="/plant-disease"
-                  enctype="multipart/form-data">
-
-                <div class="upload-box">
-
-                    <h3>Select Plant Leaf Image</h3>
+                    <label for="image">Choose a plant leaf image</label>
 
                     <input
                         type="file"
-                        name="plant_image"
-                        accept="image/*"
+                        id="image"
+                        name="image"
+                        accept=".jpg,.jpeg,.png,.webp,image/*"
                         required
                     >
 
-                    <br><br>
-
                     <button type="submit">
-                        Detect Disease
+                        Detect Plant Disease
                     </button>
-
-                </div>
-
-            </form>
-
-
-            <!-- ERROR MESSAGE -->
-
-            {% if error %}
-
-            <div class="error">
-
-                <strong>Error:</strong>
-
-                <p>{{ error }}</p>
-
+                </form>
             </div>
 
+            {% if prediction %}
+                <div class="result">
+                    <h2>Detection Result</h2>
+
+                    <p>Predicted class:</p>
+                    <p class="prediction">{{ prediction }}</p>
+
+                    {% if confidence is not none %}
+                        <p>
+                            Model confidence:
+                            <strong>{{ confidence }}%</strong>
+                        </p>
+                    {% endif %}
+
+                    {% if image_url %}
+                        <p>Uploaded image:</p>
+                        <img
+                            class="preview"
+                            src="{{ image_url }}"
+                            alt="Uploaded plant leaf"
+                        >
+                    {% endif %}
+
+                    <p>
+                        This is a model-generated prediction, not a
+                        confirmed diagnosis. Verify the result with a
+                        qualified agricultural expert before treating
+                        the plant.
+                    </p>
+                </div>
             {% endif %}
 
-
-            <!-- AI RESULT -->
-
-            {% if result %}
-
-            <div class="result">
-
-                <h2>AI Detection Result</h2>
-
-                <p>Possible Plant Disease:</p>
-
-                <div class="disease">
-                    {{ result }}
-                </div>
-
-
-                {% if confidence is not none %}
-
-                <div class="confidence">
-
-                    <strong>Confidence:</strong>
-
-                    {{ "%.2f"|format(confidence) }}%
-
-                </div>
-
-                {% endif %}
-
-
-                <p class="note">
-                    This result is generated by an AI model and should
-                    be treated as an advisory indication, not a definitive
-                    agricultural diagnosis.
-                </p>
-
-            </div>
-
-            {% endif %}
-
-
-            <!-- INFORMATION -->
-
-            <div class="info">
-
-                <h3>How it works</h3>
-
-                <p>1. Upload a clear image of a plant leaf.</p>
-
-                <p>2. The AI model analyzes the image.</p>
-
-                <p>3. The model identifies the most likely disease class.</p>
-
-                <p>4. The predicted disease and confidence are displayed.</p>
-
-            </div>
-
-        </div>
-
-    </div>
-
+            <a class="back-link" href="{{ url_for('home') }}">
+                &larr; Back to Home
+            </a>
+        </section>
+    </main>
 </body>
 </html>
