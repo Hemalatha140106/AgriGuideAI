@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+numpy
+Pillow
+tensorflow==2.21.0
+scikit-learn
+pandas
+requests
+joblib
+gunicorn
